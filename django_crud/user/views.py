@@ -188,13 +188,13 @@ def all_users(request):
         ban_user_from_group = request.POST.get("user_group_id")
         ban_user_from_platform = request.POST.get("user_platform_id")
         # delete a user from managers's group make that user also lost all
-        # persmissions from that group
+        # permissions from that group
         if ban_user_from_group:
             user = User.objects.filter(pk=int(ban_user_from_group)).first()
             is_user_in_group = user.groups.filter(
                 name="managers").exists()
             # only a users in the managers group or a user with superuser role or the user itself
-            # can remove from the managers group
+            # can be removed from the manager's group
             if request.user.id == user.id or bool(is_user_in_group) or bool(request.user.is_superuser):
                 try:
                     managers_group = Group.objects.filter(
@@ -207,7 +207,7 @@ def all_users(request):
                     return HttpResponse({"error": error})
             return HttpResponse({"message": "sorry you are not allowed for deleting users"})
         # delete a user from the platform that means that user is banned for real
-        # and it needs to register back for regain access
+        # and it needs to register back for regaining access
         if ban_user_from_platform:
             user = User.objects.filter(pk=int(request.user.id)).first()
             # only user with superuser role or a user in the managers group that can ban a user
