@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}  <title>profile</title>  {% endblock title %}
+
+{% block content %} 
+<div class="m-3">
+    <h3>Profile creation</h3>
+</div>
+ <div  class="col-md-4 m-4">
+    <form  method=POST>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Phone number</label>
+            {{ form.phonenumber }}
+        </div>
+        <div class="mb-3">
+            <label   class="form-label">Address</label>
+            {{ form.address }}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">
+                Proffession
+            </label>
+            {{ form.proffession }}
+        </div>
+        <button type="submit" class="btn btn-warning">Create Profile</button>
+    </form>
+    <div  class="my-2">
+          <span> {{ form.errors }} </span>
+    </div>
+ </div>
+{% endblock content %}

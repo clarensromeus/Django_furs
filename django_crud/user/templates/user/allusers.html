@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %} {% comment %} display a different title {%
+endcomment %} {% comment %} fdjfdkfdjfdkk {% endcomment %} {% block content %}
+<div class="col-md-4">
+  <div class="my-2">
+    {% if messages %}
+    <div class="my-2">
+      {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% if users %} {% for userdata in users %}
+  <div class="card" style="margin: 15px">
+    <div class="card-body">
+      <div class="d-flex flex-column align-items-center text-center">
+        <img
+          src="https://bootdey.com/img/Content/avatar/avatar7.png"
+          alt="Admin"
+          class="rounded-circle"
+          width="150"
+        />
+        <div class="mt-3">
+          <h4>{{ userdata.author.email }}</h4>
+          <p class="text-secondary mb-1">{{ userdata.proffession }}</p>
+          <p class="text-muted font-size-sm">{{ userdata.address|title }}</p>
+          <div class="d-flex gap-2">
+            <div>
+              <form method="post">
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  name="user_platform_id"
+                  value="{{ userdata.author.id }}"
+                >
+                  Ban from Platform
+                </button>
+              </form>
+            </div>
+            <div>
+              <form method="post">
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  class="btn btn-danger"
+                  name="user_group_id"
+                  value="{{ userdata.author.id }}"
+                >
+                  Ban from Managers
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div>
+    <h3>No users</h3>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

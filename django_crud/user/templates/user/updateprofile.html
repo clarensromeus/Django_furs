@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} <title>profile</title> {% endblock title %}
+
+{% block content %}
+<div  class="m-3" > <h3>Update profile</h3> </div>
+<div class="col-md-4 m-4">
+    <form action="{% url 'updateprofile'  %}" method=POST >
+        {% csrf_token %}
+        <div class="mb-3"   >
+            <label for="phonenumber" class="form-label">Phone number</label>
+            <input type="text" name="phonenumber" value="{{ userdata.phonenumber }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="address" >Address</label>
+            <input type="text" name="address" value="{{ userdata.address }}" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="proffession" class="form-label">
+                Proffession
+            </label>
+            <input type="text" name="proffession" value="{{ userdata.proffession }}" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-success">Update Profile</button>
+    </form>
+</div>
+{% endblock content %}

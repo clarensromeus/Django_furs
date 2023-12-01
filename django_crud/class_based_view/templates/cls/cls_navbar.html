@@ -1,0 +1,46 @@
+<nav class="navbar fixed-top navbar-expand-lg  bg-body-tertiary">
+    <div class="container-fluid">
+        <h3 class="text-primary" >Fury</h3>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home'  %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'allusers'  %}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile'  %}">Profile</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Actions
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'blog:logout'  %}">Logout with Fury</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'blog:login'  %}">Login with Fury</a></li>
+                        {% endif %}                       
+                        <li>
+                            <a class="dropdown-item" href="{% url 'blog:register'  %}">Register with fury</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'change_password'  %}">Change Password</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form action="{% url 'searching'  %}"  method=POST class="d-flex" role="search">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" name="username" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

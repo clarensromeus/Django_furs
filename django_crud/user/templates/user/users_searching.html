@@ -1,0 +1,78 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} <title> users </title> {% endblock title %}
+
+{% block content %} 
+  <div class="m-4" >
+    {% if users %}
+      {% for userdata in users %}
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{userdata.author.username}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ userdata.author.email }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Phone</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            (+509) {{ userdata.phonenumber }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Mobile</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            (+320) {{ userdata.phonenumber }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Address</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ userdata.address }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-sm-8 d-flex">
+                        <div class="col-sm-3">
+                            <a class="btn btn-success " target="__blank" href="{% url 'updateprofile'  %}">update</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="btn btn-warning " target="__blank" href="{% url 'createprofile'  %}">create profile</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="btn btn-danger " target="__blank" href="{% url 'change_password'  %}">change profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endfor %}
+    {% else %}
+    <div class="d-flex justify-content-center" >
+        <h4>No users matches the search</h4>
+    </div>
+    {% endif %}
+  </div>
+{% endblock content %}
