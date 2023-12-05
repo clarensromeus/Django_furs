@@ -193,7 +193,7 @@ def all_users(request):
             user = User.objects.filter(pk=int(ban_user_from_group)).first()
             is_user_in_group = user.groups.filter(
                 name="managers").exists()
-            # only a users in the managers group or a user with superuser role or the user itself
+            # only a user in the manager's group or a user with superuser role or the user itself
             # can be removed from the manager's group
             if request.user.id == user.id or bool(is_user_in_group) or bool(request.user.is_superuser):
                 try:
